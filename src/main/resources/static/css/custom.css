@@ -1,0 +1,55 @@
+.home-main{
+    margin-top:50px;
+    background: #ffffff !important;
+    border-radius: 4px !important;
+    padding: 32px !important;
+    padding-bottom: 24px !important;
+    width: 450px !important;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.12) !important;
+}
+
+.home-main-text{
+    font-weight:700;
+}
+
+.home-main-label{
+    font-size:12px;
+    font-weight:700;
+}
+
+.home-date{
+    width:49.5%;
+    display:inline-block;
+}
+
+.btn-custom{
+    padding: 8px 15px;
+    font-size: 17px;
+    font-weight: 600;
+    color:white;
+    background-color:#f4623a;
+    border-color:#f4623a;
+}
+
+.btn-custom:hover{
+    color:white;
+    background-color: #da5632;
+    border-color:#da5632;
+}
+
+.search-btn{
+    text-align: right;
+}
+
+.modal-mx{
+    margin: 0 15%;
+}
+
+.btn-modal{
+    width:100%;
+}
+
+.home-warning{
+	display:none;
+    color:red;
+}
