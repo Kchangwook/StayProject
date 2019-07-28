@@ -36,13 +36,18 @@
 <jsp:include page="../nav/other.jsp"/>
 
 <!-- Masthead -->
-<div class="container">
+<<div class="container">
     <div class="row">
         <div class="host-list mt-4 mx-auto">
             <h1 class="search-main-text">호스팅 현황</h1>
-            <div class="btn-group hosting-toggle">
-                <button class="btn btn-custom2" id="stay">숙소</button>
-                <button class="btn btn-default" id="reservation">예약</button>
+            <div class="float-right">
+                <div class="make-reservation">
+                    <button class="btn btn-success">숙소 등록하기</button>
+                </div>
+                <div class="btn-group hosting-toggle mt-2">
+                    <button class="btn btn-custom2" id="stay">숙소</button>
+                    <button class="btn btn-default" id="reservation">예약</button>
+                </div>
             </div>
             <div id="hosting-content">
                 <h3 class="search-main-text mt-5">내가 호스팅 하는 숙소</h3>

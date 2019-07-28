@@ -155,3 +155,58 @@
     background-color: #C5552E;
     border-color:#C5552E;
 }
+
+.hosting-toggle{
+    float:right;
+}
+
+.host-list{
+    float: left;
+    margin-left: 20px;
+    padding: 30px;
+}
+
+.btn-default{
+    padding: 8px 15px;
+    font-size: 17px;
+    font-weight: 600;
+    border-width:1.5px;
+    color:black;
+    background-color:white;
+    border-color:black;
+}
+
+.btn-default:hover{
+    background-color: #D6D6D6;
+}
+
+.reservation-table{
+    width: 750px;
+}
+
+thead{
+    color:white;
+    background-color:#fe6237;
+    font-weight:600;
+}
+
+.make-reservation{
+    font-weight: 700;
+}
+
+.custom-content{
+    width: 750px;
+}
+
+.font-custom{
+    font-weight: 700;
+}
+
+.profile-img{
+    height:300px;
+    cursor: pointer;
+}
+
+#pf-img-input{
+    display:none;
+}
