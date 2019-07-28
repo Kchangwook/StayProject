@@ -210,3 +210,11 @@ thead{
 #pf-img-input{
     display:none;
 }
+
+.stay-img{
+    height: 300px;
+}
+
+.reply-img{
+    height: 50px;
+}
