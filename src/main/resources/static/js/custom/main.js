@@ -6,22 +6,23 @@
             "img/basic/bg3.jpg"
         ], {duration: 10000, fade: 750});
 
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
         $('#check-in').datepicker({
             dateFormat: 'yy-mm-dd',
+            minDate: new Date(),
             onClose: function () {
                 $('#check-out').datepicker({
                     dateFormat: 'yy-mm-dd',
                     minDate: new Date($('#check-in').val())
                 });
-            },
-            minDate: new Date()
+            }
         });
 
-        $('#check-out').on('click', function () {
-            if ($('#check-in').val() == '') {
-                alert('체크인을 먼저 입력해주세요.');
-                $('#check-in').focus();
-            }
+        $('#check-out').datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: tomorrow
         });
         
         $('#join-btn').on('click', function(){

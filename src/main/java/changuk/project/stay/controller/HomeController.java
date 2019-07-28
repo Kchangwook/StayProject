@@ -1,6 +1,7 @@
 package changuk.project.stay.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,5 +42,14 @@ public class HomeController {
 		return "home";
 		
 	}//end of post
+	
+	/** 로그아웃 **/
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		
+		session.invalidate();
+		return "home";
+		
+	}//end of logout
 	
 }//end of HomeController

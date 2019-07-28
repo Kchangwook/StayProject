@@ -3,18 +3,9 @@
 <!DOCTYPE html>
 <html>
 <body>
-
-<input type="hidden" id="msg" value="${msg}">
-
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light py-3" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-light py-3 session-nav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="/">Stay Project</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand js-scroll-trigger text-white" href="#page-top">Stay Project</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
@@ -27,7 +18,6 @@
         </div>
     </div>
 </nav>
-
 
 <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -45,7 +35,7 @@
                         <input type="password" class="form-control modal-input-text" placeholder="비밀번호" name="password" required>
                     </div>
                 </div>
-                <button class="btn btn-custom mt-4 btn-modal mb-4" type="submit">로그인</button>
+                <button class="btn btn-custom2 mt-4 btn-modal mb-4" type="submit">로그인</button>
                </form>
             </div>
         </div>
@@ -80,7 +70,7 @@
                                    placeholder="010-xxxx-xxxx" name="phone" required>
                         </div>
                     </div>
-                    <button class="btn btn-custom mt-4 btn-modal mb-4" id="join-btn" type="submit">회원가입</button>
+                    <button class="btn btn-custom2 mt-4 btn-modal mb-4" id="join-btn" type="submit">회원가입</button>
                 </form>
             </div>
         </div>
