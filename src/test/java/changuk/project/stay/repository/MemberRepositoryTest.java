@@ -19,10 +19,10 @@ import changuk.project.stay.repository.MemberRepository;
 public class MemberRepositoryTest {
 
 	@Autowired
-	MemberRepository repository;
-	Member m1;
-	Member m2;
-	Member m3;
+	private MemberRepository repository;
+	private Member m1;
+	private Member m2;
+	private Member m3;
 
 	@Before
 	public void setUp() {
@@ -57,5 +57,20 @@ public class MemberRepositoryTest {
 		assertThat(repository.countByEmail(m1.getEmail()), is(1));
 		
 	}//end of get
+	
+	/** 데이터 수정 **/
+	@Test
+	public void update() {
+		
+		int ran = (int)(Math.random() * 1000);
+		m2.setPassword(ran + "");
+		
+		repository.save(m2);
+		
+		Member temp = repository.findByEmail(m2.getEmail());
+		
+		assertThat(temp.getPassword(), is(m2.getPassword()));
+		
+	}//end of update
 
 }// end of MemberRepositoryTest

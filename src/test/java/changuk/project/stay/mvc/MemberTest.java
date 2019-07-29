@@ -6,17 +6,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
 import changuk.project.stay.controller.MemberController;
 import changuk.project.stay.domain.Member;
@@ -63,5 +64,33 @@ public class MemberTest {
 		.andExpect(request().attribute("msg", "회원가입에 실패했습니다."));
 		
 	}//end of join
+	
+	@Test
+	/** 회원 정보 수정 테스트 **/
+	public void put() throws Exception {
+		
+		// MockMultipartFile을 이용한 테스트용 파일
+		MockMultipartFile file = new MockMultipartFile("member_img", "dummy.csv",
+	            "text/plain", "Some dataset...".getBytes());
+		
+		when(memberService.update(m1, m2, file)).thenReturn(m3);
+		
+		mvc.perform(MockMvcRequestBuilders.multipart("/member").file(file)
+				// PUT 내부에는 Method는 Multipart를 지원하지 않기 때문에 
+				// MultipartRequest의 Method를 PUT으로 변경
+				.with(new RequestPostProcessor() {
+			@Override
+			public MockHttpServletRequest postProcessRequest(MockHttpServletRequest request) {
+				request.setMethod("PUT");
+				return request;
+			}
+		}).sessionAttr("member", m1).param("email",m2.getEmail()).param("password", m2.getPassword())
+				.param("name", m2.getName()).param("phone", m2.getPhone()))
+		.andExpect(status().isOk())
+		.andExpect(view().name("home"))
+		.andExpect(request().attribute("msg", "회원 정보 수정이 되셨습니다."))
+		.andExpect(request().sessionAttribute("member", m3));
+		
+	}//end of put
 	
 }//end of MemberTest

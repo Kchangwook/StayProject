@@ -2,6 +2,7 @@ package changuk.project.stay.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import changuk.project.stay.domain.Member;
 import changuk.project.stay.repository.MemberRepository;
@@ -32,5 +33,23 @@ public class MemberServiceImpl implements MemberService {
 	public boolean check(String email) {
 		return memberRepository.countByEmail(email) > 0;
 	}//end of check
+
+	@Override
+	/** 회원 정보 수정 **/
+	public Member update(Member before, Member after, MultipartFile file) {
+		
+		// 패스워드 변경 안 할때
+		if(after.getPassword().isEmpty()) after.setPassword(before.getPassword());
+		// 이름 변경 안 할때
+		if(after.getName().isEmpty()) after.setName(before.getName());
+		// 연락처 변경 안 할때
+		if(after.getPhone().isEmpty()) after.setPhone(before.getPhone());
+		// 이미지 변경 시
+		if(!file.isEmpty()) after.setImage("");
+		else after.setImage(before.getImage());
+		
+		return after;
+		
+	}//end of update
 	
 }//end of MemberServiceImpl
