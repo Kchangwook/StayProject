@@ -45,7 +45,7 @@
                     <span>숙소 주소</span>
                     <button class="btn btn-success font-custom float-right">예약하기</button>
                 </div>
-                <div class="stay-img mx-auto mt-3 col-12">
+                <div class="stay-img mx-auto mt-3">
                     <img src="./img/stay.jpg" class="stay-img">
                 </div>
                 <div class="stay-info mt-5 col-12">

@@ -32,42 +32,49 @@
 
 </head>
 <body>
-
-<jsp:include page="./nav/other.jsp"/>
-
-<!-- Masthead -->
 <div class="container">
     <div class="row">
         <div class="host-list mt-4 mx-auto">
-            <h1 class="search-main-text">마이 페이지</h1>
+            <h1 class="search-main-text">호스팅하기</h1>
             <div class="custom-content row">
                 <div class="col-5">
                     <div class="mt-4">
-                        <label for="join-email" class="home-main-label">이메일</label>
-                        <input type="email" class="form-control" id="join-email" name="email" required readonly>
+                        <label for="name" class="home-main-label">이름</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
                     </div>
-                    <div class="mt-2">
-                        <label for="join-password" class="home-main-label">비밀번호</label>
-                        <input type="password" class="form-control" id="join-password" name="password">
+                    <div class="mt-3">
+                        <label for="addr" class="home-main-label">주소</label>
+                        <input type="text" class="form-control" id="addr" name="password" required>
                     </div>
-                    <div class="mt-2">
-                        <label for="join-name" class="home-main-label">이름</label>
-                        <input type="text" class="form-control" id="join-name" name="name" required>
+                    <div class="mt-3">
+                        <label for="domain" class="home-main-label">홈페이지</label>
+                        <input type="text" class="form-control" id="domain" name="password" required>
                     </div>
-                    <div class="mt-2">
-                        <label for="join-phone" class="home-main-label">연락처</label>
-                        <input type="tel" class="form-control" id="join-phone" pattern="(010)-\d{3,4}-\d{4}"
-                               placeholder="010-xxxx-xxxx" name="phone" required>
+                    <div class="mt-3">
+                        <label for="rooms" class="home-main-label">객실 수</label>
+                        <input type="number" class="form-control" id="rooms" min="1" name="password" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="people" class="home-main-label">객실당 인원</label>
+                        <input type="number" class="form-control" id="people" min="1" name="password" required>
+                    </div>
+                    <div class="mt-3">
+                        <label for="price" class="home-main-label">가격</label>
+                        <input type="number" class="form-control" id="price" name="password" required>
                     </div>
                 </div>
-                <div class="col-7 mt-4 pt-2">
-                	<label for="pf-img-input" class="home-main-label">이미지</label><br>
+                <div class="col-7 mt-4 pt-2 pl-3">
+                    <label for="pf-img-input" class="home-main-label">이미지</label><br>
                     <img src="./img/profile.png" id="pf-img" class="profile-img">
                     <input type="file" id="pf-img-input">
+                    <div class="mt-3">
+                        <label for="intro" class="home-main-label">소개</label>
+                        <textarea id="intro" class="form-control" rows="4"></textarea>
+                    </div>
                 </div>
             </div>
             <div class="mt-4">
-                <button class="btn btn-success font-custom">수정</button>
+                <button class="btn btn-success font-custom">등록</button>
                 <button class="btn btn-danger font-custom">취소</button>
             </div>
         </div>
@@ -104,7 +111,7 @@
     }
 
     $('#pf-img-input').change(function(){
-        readURL(this);
+            readURL(this);
         }
     );
 
