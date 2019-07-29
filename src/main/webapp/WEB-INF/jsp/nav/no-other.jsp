@@ -5,7 +5,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light py-3 session-nav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger text-white" href="#page-top">Stay Project</a>
+        <a class="navbar-brand js-scroll-trigger text-white" href="/">Stay Project</a>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">

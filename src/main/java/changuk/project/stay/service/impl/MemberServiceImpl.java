@@ -1,5 +1,7 @@
 package changuk.project.stay.service.impl;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -7,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import changuk.project.stay.domain.Member;
 import changuk.project.stay.repository.MemberRepository;
 import changuk.project.stay.service.MemberService;
+import changuk.project.stay.util.MultipartUtil;
 
 /** Member 데이터 관련 Service 구현 **/
 @Service
@@ -36,7 +39,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	/** 회원 정보 수정 **/
-	public Member update(Member before, Member after, MultipartFile file) {
+	public Member update(Member before, Member after, MultipartFile file) throws IllegalStateException, IOException {
 		
 		// 패스워드 변경 안 할때
 		if(after.getPassword().isEmpty()) after.setPassword(before.getPassword());
@@ -45,8 +48,10 @@ public class MemberServiceImpl implements MemberService {
 		// 연락처 변경 안 할때
 		if(after.getPhone().isEmpty()) after.setPhone(before.getPhone());
 		// 이미지 변경 시
-		if(!file.isEmpty()) after.setImage("");
+		if(!file.isEmpty()) after.setImage(MultipartUtil.upload(file, "mem-prof", after.getEmail().split("@")[0]));
 		else after.setImage(before.getImage());
+		
+		memberRepository.save(after);
 		
 		return after;
 		

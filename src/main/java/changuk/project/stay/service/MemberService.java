@@ -1,5 +1,7 @@
 package changuk.project.stay.service;
 
+import java.io.IOException;
+
 import javax.transaction.Transactional;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +15,7 @@ public interface MemberService {
 	Member findByEmail(String email);	// 이메일을 이용해 Member 데이터 탐색
 	Member add(Member member);			// 회원가입
 	boolean check(String email);		// 이메일을 통한 데이터 중복 여부 체크
-	Member update(Member before, Member after, MultipartFile file); //회원 정보 수정
+	//회원 정보 수정
+	Member update(Member before, Member after, MultipartFile file) throws IllegalStateException, IOException; 
 	
 }//end of MemberService
