@@ -48,11 +48,11 @@
                     </div>
                     <div class="mt-3">
                         <label for="addr" class="home-main-label">주소</label>
-                        <input type="text" class="form-control" id="addr" name="password" required>
+                        <input type="text" class="form-control" id="addr" name="address" required>
                     </div>
                     <div class="mt-3">
                         <label for="domain" class="home-main-label">홈페이지</label>
-                        <input type="text" class="form-control" id="domain" name="domain" required>
+                        <input type="text" class="form-control" id="domain" name="domain">
                     </div>
                     <div class="mt-3">
                         <label for="rooms" class="home-main-label">객실 수</label>
@@ -65,6 +65,11 @@
                     <div class="mt-3">
                         <label for="price" class="home-main-label">가격</label>
                         <input type="number" class="form-control" id="price" name="price" required>
+                    </div>
+                    <div class="mt-2">
+                        <label for="join-phone" class="home-main-label">연락처</label>
+                        <input type="tel" class="form-control" id="join-phone" pattern="(010)-\d{3,4}-\d{4}"
+                               placeholder="010-xxxx-xxxx" name="phone" required>
                     </div>
                 </div>
                 <div class="col-7 mt-4 pt-2 pl-3">

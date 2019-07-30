@@ -25,7 +25,9 @@ public class StayServiceImpl implements StayService {
 	@Override
 	public boolean add(Stay s, MultipartFile file) throws IllegalStateException, IOException {
 		
-		if(!file.isEmpty()) s.setImage(MultipartUtil.upload(file, "stay-prof", s.getEmail().split("@")[0] + "and" +s.getName()));
+		System.out.println(s);
+		
+		if(!file.isEmpty()) s.setImage(MultipartUtil.upload(file, "stay-prof", s.getAddress().hashCode() + ""));
 		else s.setImage("/img/basic/stay.jpg");
 		
 		return stayRepository.save(s) != null;
