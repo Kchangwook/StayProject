@@ -2,6 +2,7 @@ package changuk.project.stay.mvc;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -31,6 +32,9 @@ public class MemberTest {
 	private @MockBean MemberService memberService;
 	private @Autowired MockMvc mvc;
 	
+	// MockMultipartFile을 이용한 테스트용 파일
+	private MockMultipartFile file;
+	
 	private Member m1;
 	private Member m2;
 	private Member m3;
@@ -41,6 +45,9 @@ public class MemberTest {
 		m1 = Member.builder().email("kchangwook@naver.com").password("1234").name("김창욱").phone("010-2684-1451").build();
 		m2 = Member.builder().email("ckddnr@naver.com").password("1234").name("창욱").phone("010-2684-1451").build();
 		m3 = Member.builder().email("rlackddnr@naver.com").password("1234").name("김창욱").phone("010-2684-1451").build();
+		
+		file = new MockMultipartFile("member_img", "dummy.csv",
+	            "text/plain", "Some dataset...".getBytes());
 		
 	}// end of setUp
 	
@@ -69,10 +76,6 @@ public class MemberTest {
 	/** 회원 정보 수정 테스트 **/
 	public void put() throws Exception {
 		
-		// MockMultipartFile을 이용한 테스트용 파일
-		MockMultipartFile file = new MockMultipartFile("member_img", "dummy.csv",
-	            "text/plain", "Some dataset...".getBytes());
-		
 		when(memberService.update(m1, m2, file)).thenReturn(m3);
 		
 		mvc.perform(MockMvcRequestBuilders.multipart("/member").file(file)
@@ -86,9 +89,8 @@ public class MemberTest {
 			}
 		}).sessionAttr("member", m1).param("email",m2.getEmail()).param("password", m2.getPassword())
 				.param("name", m2.getName()).param("phone", m2.getPhone()))
-		.andExpect(status().isOk())
-		.andExpect(view().name("home"))
-		.andExpect(request().attribute("msg", "회원 정보 수정이 되셨습니다."))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(header().string("Location","/"))
 		.andExpect(request().sessionAttribute("member", m3));
 		
 	}//end of put

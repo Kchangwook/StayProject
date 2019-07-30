@@ -91,31 +91,6 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.tmpl.min.js"></script>
-<script>
-
-	$('#cancel').on('click',function(){
-		history.back();
-	});
-	
-    $('#pf-img').on('click',function(){
-        $('#pf-img-input').click();
-    });
-
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#pf-img').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $('#pf-img-input').change(function(){
-        readURL(this);
-        }
-    );
-
-</script>
+<script src="/js/custom/reader.js"></script>
 </body>
 </html>

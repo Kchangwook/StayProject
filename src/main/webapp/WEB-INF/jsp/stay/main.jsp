@@ -12,7 +12,7 @@
     <title>Stay Project</title>
 
     <!-- Font Awesome Icons -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
@@ -20,13 +20,13 @@
           rel='stylesheet' type='text/css'>
 
     <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <!-- Theme CSS - Includes Bootstrap -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="css/creative.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="img/logo-icon.png">
-    <link href="css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="/css/creative.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/basic/logo-icon.png">
+    <link href="/css/custom.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
 
@@ -42,7 +42,7 @@
             <h1 class="search-main-text">호스팅 현황</h1>
             <div class="float-right">
                 <div class="make-reservation">
-                    <button class="btn btn-success">숙소 등록하기</button>
+                    <button class="btn btn-success" id="stay-regist">숙소 등록하기</button>
                 </div>
                 <div class="btn-group hosting-toggle mt-2">
                     <button class="btn btn-custom2" id="stay">숙소</button>
@@ -68,19 +68,19 @@
     </div>
 </div>
 
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Plugin JavaScript -->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
 <!-- Custom scripts for this template -->
-<script src="js/creative.min.js"></script>
-<script src="js/backstretch.js"></script>
+<script src="/js/creative.min.js"></script>
+<script src="/js/backstretch.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.tmpl.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tmpl.min.js"></script>
 <script id="hosting-stay" type="text/template">
     <h3 class="search-main-text mt-5">내가 호스팅 하는 숙소</h3>
     <div class="stay-item mt-4 row">
@@ -159,6 +159,10 @@
             $('#hosting-content').empty();
             $('#hosting-reservation').tmpl().appendTo('#hosting-content');
         }
+    });
+    
+    $('#stay-regist').on('click',function(){
+    	location.href='/stay'
     });
 
 </script>
