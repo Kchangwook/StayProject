@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +37,7 @@
 <jsp:include page="../nav/other.jsp"/>
 
 <!-- Masthead -->
-<<div class="container">
+<div class="container">
     <div class="row">
         <div class="host-list mt-4 mx-auto">
             <h1 class="search-main-text">호스팅 현황</h1>
@@ -51,18 +52,25 @@
             </div>
             <div id="hosting-content">
                 <h3 class="search-main-text mt-5">내가 호스팅 하는 숙소</h3>
+                <c:if test="${empty list}">
+                <h4 class="search-main-text mt-5">호스팅 중인 숙소가 없습니다.</h4>
+                </c:if>
+                <c:if test="${not empty list}">
+                <c:forEach items="${list}" var="stay">
                 <div class="stay-item mt-4 row">
-                    <img src="img/stay.jpg" class="search-img col-4">
+                    <img src="${stay.image}" class="search-img col-4">
                     <div class="col-8">
-                        <p class="mt-2"><b>이름</b></p>
+                        <p class="mt-2"><b>${stay.name}</b></p>
                         <p>소개</p>
                         <div class="search-content mt-4">
-                            객실 수<br>
-                            인원 수<br>
-                            가격<br>
+                            	객실 수: ${stay.rooms}<br>
+                            	인원 수: ${stay.people }<br>
+                            	가격: ${stay.price}<br>
                         </div>
                     </div>
                 </div>
+                </c:forEach>
+                </c:if>
             </div>
         </div>
     </div>
@@ -83,18 +91,20 @@
 <script src="/js/jquery.tmpl.min.js"></script>
 <script id="hosting-stay" type="text/template">
     <h3 class="search-main-text mt-5">내가 호스팅 하는 숙소</h3>
-    <div class="stay-item mt-4 row">
-        <img src="img/stay.jpg" class="search-img col-4">
-        <div class="col-8">
-            <p class="mt-2"><b>이름</b></p>
-            <p>소개</p>
-            <div class="search-content mt-4">
-                객실 수<br>
-                인원 수<br>
-                가격<br>
-            </div>
-        </div>
-    </div>
+    <c:forEach items="${list}" var="stay">
+                <div class="stay-item mt-4 row">
+                    <img src="${stay.image}" class="search-img col-4">
+                    <div class="col-8">
+                        <p class="mt-2"><b>${stay.name}</b></p>
+                        <p>소개</p>
+                        <div class="search-content mt-4">
+                            	객실 수: ${stay.rooms}<br>
+                            	인원 수: ${stay.people }<br>
+                            	가격: ${stay.price}<br>
+                        </div>
+                    </div>
+                </div>
+                </c:forEach>
 </script>
 <script id="hosting-reservation" type="text/template">
     <h3 class="search-main-text mt-5">예약 현황</h3>

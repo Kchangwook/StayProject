@@ -17,19 +17,19 @@ import lombok.NoArgsConstructor;
 public class Member {
 
 	@Id
-	@Column(name = "member_email", nullable = false)
+	@Column(name = "memberemail", nullable = false)
 	private String email;
 
-	@Column(name = "member_password", nullable = false)
+	@Column(name = "memberpassword", nullable = false)
 	private String password;
 
-	@Column(name = "member_name", nullable = false)
+	@Column(name = "membername", nullable = false)
 	private String name;
 
-	@Column(name = "member_phone", nullable = false)
+	@Column(name = "memberphone", nullable = false)
 	private String phone;
 
-	@Column(name = "member_image", nullable = true)
+	@Column(name = "memberimage", nullable = true)
 	private String image;
 
 	@Builder

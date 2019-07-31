@@ -1,6 +1,7 @@
 package changuk.project.stay.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -13,5 +14,6 @@ import changuk.project.stay.domain.Stay;
 public interface StayService {
 
 	boolean add(Stay s, MultipartFile file) throws IllegalStateException, IOException ;	//숙소 등록
+	List<Stay> getList(String email);	// 이메일로 호스팅하는 숙소 목록 가져오기
 	
 }//end of StayService

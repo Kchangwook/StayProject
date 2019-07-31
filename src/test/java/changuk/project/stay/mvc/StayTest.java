@@ -1,9 +1,15 @@
 package changuk.project.stay.mvc;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,15 +48,15 @@ public class StayTest {
 	@Before
 	public void setUp() {
 		
-		s1 = Stay.builder().email("kchangwook@naver.com").address("서울 동작구 대방동 391-311").domain("www.naver.com")
+		s1 = Stay.builder().code(1).email("kchangwook@naver.com").address("서울 동작구 대방동 391-311").domain("www.naver.com")
 				.image("/img/basic/stay.jpg").intro("안녕").name("123").people(1).rooms(1).phone("010-2684-1451")
 				.price(100).build();
 		
-		s2 = Stay.builder().email("kchangwook@naver.com").address("서울 동작구 대방동 391-312").domain("www.naver.com")
+		s2 = Stay.builder().code(2).email("kchangwook@naver.com").address("서울 동작구 대방동 391-312").domain("www.naver.com")
 				.image("/img/basic/stay.jpg").intro("안녕").name("234").people(2).rooms(2).phone("010-2684-1451")
 				.price(200).build();
 		
-		s3 = Stay.builder().email("kchangwook@naver.com").address("서울 동작구 대방동 391-313").domain("www.naver.com")
+		s3 = Stay.builder().code(3).email("kchangwook@naver.com").address("서울 동작구 대방동 391-313").domain("www.naver.com")
 				.image("/img/basic/stay.jpg").intro("안녕").name("345").people(3).rooms(3).phone("010-2684-1451")
 				.price(300).build();
 		
@@ -74,5 +80,24 @@ public class StayTest {
 				
 				
 	}//end of add
+	
+	/** hosting URL 테스트 
+	 * @throws Exception **/
+	@Test
+	public void hosting() throws Exception {
+		
+		List<Stay> list = new ArrayList<>();
+		list.add(s1);
+		list.add(s2);
+		list.add(s3);
+		
+		when(stayService.getList(m1.getEmail())).thenReturn(list);
+		
+		mvc.perform(get("/stay/hosting").sessionAttr("member", m1))
+		.andExpect(status().isOk())
+		.andExpect(view().name("stay/main"))
+		.andExpect(model().attribute("list", list));
+		
+	}//end of hosting
 	
 }//end of StayTest

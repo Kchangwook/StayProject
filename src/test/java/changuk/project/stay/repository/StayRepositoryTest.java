@@ -3,6 +3,8 @@ package changuk.project.stay.repository;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,15 +28,15 @@ public class StayRepositoryTest {
 	@Before
 	public void setUp() {
 		
-		s1 = Stay.builder().email("kchangwook@naver.com").address("서울 동작구 대방동 391-311").domain("www.naver.com")
+		s1 = Stay.builder().code(1).email("kchangwook@naver.com").address("서울 동작구 대방동 391-311").domain("www.naver.com")
 				.image("/img/basic/stay.jpg").intro("안녕").name("123").people(1).rooms(1).phone("010-2684-1451")
 				.price(100).build();
 		
-		s2 = Stay.builder().email("kchangwook@naver.com").address("서울 동작구 대방동 391-312").domain("www.naver.com")
+		s2 = Stay.builder().code(2).email("kchangwook@naver.com").address("서울 동작구 대방동 391-312").domain("www.naver.com")
 				.image("/img/basic/stay.jpg").intro("안녕").name("234").people(2).rooms(2).phone("010-2684-1451")
 				.price(200).build();
 		
-		s3 = Stay.builder().email("kchangwook@naver.com").address("서울 동작구 대방동 391-313").domain("www.naver.com")
+		s3 = Stay.builder().code(3).email("kchangwook@naver.com").address("서울 동작구 대방동 391-313").domain("www.naver.com")
 				.image("/img/basic/stay.jpg").intro("안녕").name("345").people(3).rooms(3).phone("010-2684-1451")
 				.price(300).build();
 		
@@ -52,5 +54,16 @@ public class StayRepositoryTest {
 		assertThat(temp.getPrice(), is(s1.getPrice()));
 		
 	}//end of save
+	
+	/** 이메일과 일치하는 리스트 가져오기 **/
+	@Test
+	public void findByEmail() {
+		
+		List<Stay> list = repository.findByEmailOrderByCode("kchangwook@naver.com");
+		
+		assertThat(list.size(), is(2));
+		assertThat(list.get(0).getDomain(), is(s1.getDomain()));
+		
+	}//end of findByEmail
 	
 }//end of StayRepositoryTest

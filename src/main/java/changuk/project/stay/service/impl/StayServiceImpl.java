@@ -1,6 +1,7 @@
 package changuk.project.stay.service.impl;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,12 +26,16 @@ public class StayServiceImpl implements StayService {
 	@Override
 	public boolean add(Stay s, MultipartFile file) throws IllegalStateException, IOException {
 		
-		System.out.println(s);
-		
 		if(!file.isEmpty()) s.setImage(MultipartUtil.upload(file, "stay-prof", s.getAddress().hashCode() + ""));
 		else s.setImage("/img/basic/stay.jpg");
 		
 		return stayRepository.save(s) != null;
 	}//end of add
+
+	/** 호스팅하는 숙소 목록 가져오기 **/
+	@Override
+	public List<Stay> getList(String email) {
+		return stayRepository.findByEmailOrderByCode(email);
+	}//end of getList
 
 }//end of StayServiceImpl

@@ -22,43 +22,44 @@ public class Stay {
 	/* 변수 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="stay_code")
+	@Column(name="staycode")
 	private Integer code;
 	
-	@Column(name="member_email", nullable=false)
+	@Column(name="memberemail", nullable=false)
 	private String email;
 	
-	@Column(name="stay_name", nullable=false)
+	@Column(name="stayname", nullable=false)
 	private String name;
 	
-	@Column(name="stay_people", nullable=false)
+	@Column(name="staypeople", nullable=false)
 	private Integer people;
 	
-	@Column(name="stay_address")
+	@Column(name="stayaddress")
 	private String address;
 	
-	@Column(name="stay_phone")
+	@Column(name="stayphone")
 	private String phone;
 	
-	@Column(name="stay_domain")
+	@Column(name="staydomain")
 	private String domain;
 	
-	@Column(name="stay_rooms", nullable=false)
+	@Column(name="stayrooms", nullable=false)
 	private Integer rooms;
 	
-	@Column(name="stay_intro")
+	@Column(name="stayintro")
 	private String intro;
 	
-	@Column(name="stay_image")
+	@Column(name="stayimage")
 	private String image;
 	
-	@Column(name="stay_price", nullable=false)
+	@Column(name="stayprice", nullable=false)
 	private Integer price;
 	
 	@Builder
-	public Stay(String email, String name, Integer people, String address, String phone, String domain, Integer rooms,
+	public Stay(Integer code, String email, String name, Integer people, String address, String phone, String domain, Integer rooms,
 			String intro, String image, Integer price) {
 		super();
+		this.code = code;
 		this.email = email;
 		this.name = name;
 		this.people = people;
