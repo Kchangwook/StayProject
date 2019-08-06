@@ -125,4 +125,18 @@ public class StayTest {
 		
 	}//end of search
 	
+	/** stay/{code} URI Test 
+	 * @throws Exception **/
+	@Test
+	public void getStay() throws Exception {
+		
+		when(stayService.getStay(1)).thenReturn(s1);
+		
+		mvc.perform(get("/stay/1"))
+		.andExpect(status().isOk())
+		.andExpect(model().attribute("stay", s1))
+		.andExpect(view().name("stay/detail"));
+		
+	}//end of getStay
+	
 }//end of StayTest

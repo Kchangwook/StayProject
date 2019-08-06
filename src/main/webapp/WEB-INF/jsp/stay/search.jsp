@@ -65,15 +65,14 @@
             <input type="number" class="form-control" id="people" min="0" name="people" value="${reservation.people}" required>
         </div>
         <div class="search-btn mt-3 mb-2">
-            <button class="btn btn-custom2" type="submit">검색</button>
+            <button class="btn btn-success" type="submit">검색</button>
         </div>
         </form>
     </div>
     <div class="stay-list mt-4">
         <h1 class="search-main-text">검색 결과</h1>
-        <input type="hidden" value="${list}">
         <c:forEach items="${list}" var="stay">
-        <div class="stay-item mt-4 row">
+        <div class="stay-item mt-4 row" onClick="move(${stay.code})">
             <img src="${stay.image}" class="search-img col-4">
             <div class="col-8">
                 <p class="mt-2"><b>${stay.name}</b></p>
@@ -104,6 +103,12 @@
 <script src="/js/bootstrap.min.js"></script>
 
 <script>
+
+	function move(num){
+		
+		location.href='/stay/' + num;
+		
+	}//end of move
 
     $(document).ready(function () {
 

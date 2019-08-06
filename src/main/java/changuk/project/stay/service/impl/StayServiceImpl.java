@@ -55,4 +55,10 @@ public class StayServiceImpl implements StayService {
 	
 	}//end of findReserve
 
+	/** 숙소 코드로 숙소 가져오기 **/
+	@Override
+	public Stay getStay(Integer code) {
+		return stayRepository.findByCode(code);
+	}//end of getStay
+
 }//end of StayServiceImpl

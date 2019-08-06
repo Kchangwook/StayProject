@@ -3,7 +3,6 @@ package changuk.project.stay.repository;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import changuk.project.stay.domain.Reservation;
 import changuk.project.stay.domain.Stay;
 
 @RunWith(SpringRunner.class)
@@ -67,6 +65,19 @@ public class StayRepositoryTest {
 		assertThat(list.get(0).getDomain(), is(s1.getDomain()));
 		
 	}//end of findByEmail
+	
+	/** 숙소 코드와 일치하는 숙소 가져오기 **/
+	@Test
+	public void findByCode() {
+		
+		Stay temp = repository.findByCode(1);
+		
+		assertThat(s1.getName(), is(temp.getName()));
+		assertThat(s1.getDomain(), is(temp.getDomain()));
+		assertThat(s1.getImage(), is(temp.getImage()));
+		assertThat(s1.getAddress(), is(temp.getAddress()));
+		
+	}//end of findByCode
 	
 	
 }//end of StayRepositoryTest

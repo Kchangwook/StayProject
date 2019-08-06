@@ -30,7 +30,7 @@
             <div class="modal-body modal-mx">
             <form action="/" method="post">
                 <div class="mt-4">
-                    <img src="img/basic/logo-icon.png" class="d-block mx-auto">
+                    <img src="/img/basic/logo-icon.png" class="d-block mx-auto">
                 </div>
                 <div>
                     <div class="mt-4">
@@ -52,7 +52,7 @@
         <div class="modal-content">
             <div class="modal-body modal-mx">
                 <div class="mt-4">
-                    <img src="img/basic/logo-icon.png" class="d-block mx-auto">
+                    <img src="/img/basic/logo-icon.png" class="d-block mx-auto">
                 </div>
                 <form action="member" method="post" id="join-frm">
                     <div>

@@ -133,6 +133,10 @@
     background-color: white;
 }
 
+.stay-item:hover{
+	cursor: pointer;
+}
+
 .search-img{
     height:200px;
 }

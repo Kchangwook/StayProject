@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
     <title>Stay Project</title>
 
     <!-- Font Awesome Icons -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
@@ -20,41 +21,46 @@
           rel='stylesheet' type='text/css'>
 
     <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <!-- Theme CSS - Includes Bootstrap -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="css/creative.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="img/logo-icon.png">
-    <link href="css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link href="/css/creative.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/basic/logo-icon.png">
+    <link href="/css/custom.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
 
 </head>
 <body>
 
+<c:if test="${empty member }">
+	<jsp:include page="../nav/no-other.jsp"/>
+</c:if>
+<c:if test="${not empty member }">
+	<jsp:include page="../nav/other.jsp"/>
+</c:if>
 
-
-<!-- Masthead -->
 <div class="container">
     <div class="row">
         <div class="host-list mt-4 mx-auto">
-            <h1 class="search-main-text">숙소 이름</h1>
+            <h1 class="search-main-text">${stay.name}</h1>
             <div class="custom-content row">
                 <div class="col-12">
-                    <span>숙소 주소</span>
+                    <span>${stay.address}</span>
                     <button class="btn btn-success font-custom float-right">예약하기</button>
                 </div>
                 <div class="stay-img mx-auto mt-3">
-                    <img src="./img/stay.jpg" class="stay-img">
+                    <img src="${stay.image}" class="stay-img">
                 </div>
                 <div class="stay-info mt-5 col-12">
-                    <p>인원</p>
-                    <p>가격</p>
-                    <p>홈페이지</p>
-                    <p>전화번호</p>
-                    <p>남은 객실 수</p>
-                    <p>객실 소개</p>
+                    <p>인원: ${stay.people}</p>
+                    <p>가격: ${stay.price}</p>
+                    <c:if test="${not empty stay.domain}">
+                    <p>홈페이지: <a href="http://${stay.domain}">${stay.domain}</a></p>
+                    </c:if>
+                    <p>전화번호: ${stay.phone}</p>
+                    <p>객실 소개: ${stay.intro}</p>
                 </div>
                 <div class="reply-list col-lg-12 mt-4">
                     <h3 class="search-main-text">후기</h3>
@@ -72,18 +78,18 @@
 </div>
 
 <!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Plugin JavaScript -->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
 <!-- Custom scripts for this template -->
-<script src="js/creative.min.js"></script>
-<script src="js/backstretch.js"></script>
+<script src="/js/creative.min.js"></script>
+<script src="/js/backstretch.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.tmpl.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.tmpl.min.js"></script>
 </body>
 </html>

@@ -2,13 +2,13 @@ package changuk.project.stay.controller;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,5 +71,15 @@ public class StayController {
 		return "stay/search";
 		
 	}//end of search
+	
+	/** 숙소 코드와 일치하는 숙소 정보 가져오기 **/
+	@GetMapping("{code}")
+	public String getStay(Model model, @PathVariable Integer code) {
+		
+		model.addAttribute("stay", stayService.getStay(code));
+		
+		return "stay/detail";
+		
+	}//end of getStay
 	
 }//end of StayController
