@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,68 +30,78 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 </head>
 <body>
-<!-- Masthead -->
-<main class="container">
+
+<c:if test="${empty member }">
+	<jsp:include page="../nav/no-other.jsp"/>
+</c:if>
+<c:if test="${not empty member }">
+	<jsp:include page="../nav/other.jsp"/>
+</c:if>
+
+<div class="container">
     <div class="search-nav mb-5">
         <h2 class="home-main-text">검색</h2>
+        <form action="/stay/search" method="post">
         <div class="mt-4">
             <label for="dest" class="home-main-label">목적지</label>
-            <input type="text" class="form-control" id="dest" required>
+            <input type="text" class="form-control" id="dest" name="address" value="${address}" required>
         </div>
         <div class="mt-2">
             <div>
                 <label for="check-in" class="home-main-label">체크인</label>
                 <div class='input-group date'>
-                    <input type='text' class="form-control" id="check-in" required>
-                    </span>
+                    <input type='text' class="form-control" id="check-in" name="checkIn" value="${reservation.checkIn}" required>
                 </div>
             </div>
             <div>
                 <label for="check-out" class="home-main-label">체크아웃</label>
                 <div class='input-group date'>
-                    <input type='text' class="form-control" id="check-out" required>
-                    </span>
+                    <input type='text' class="form-control" id="check-out" name="checkOut" value="${reservation.checkOut}" required>
                 </div>
             </div>
         </div>
         <div class="mt2">
             <label for="people" class="home-main-label">인원</label>
-            <input type="number" class="form-control" id="people" min="0" value="0" required>
+            <input type="number" class="form-control" id="people" min="0" name="people" value="${reservation.people}" required>
         </div>
         <div class="search-btn mt-3 mb-2">
-            <button class="btn btn-custom-search">검색</button>
+            <button class="btn btn-custom2" type="submit">검색</button>
         </div>
+        </form>
     </div>
     <div class="stay-list mt-4">
         <h1 class="search-main-text">검색 결과</h1>
+        <input type="hidden" value="${list}">
+        <c:forEach items="${list}" var="stay">
         <div class="stay-item mt-4 row">
-            <img src="img/stay.jpg" class="search-img col-4">
+            <img src="${stay.image}" class="search-img col-4">
             <div class="col-8">
-                <p class="mt-2"><b>이름</b></p>
-                <p class="">소개</p>
+                <p class="mt-2"><b>${stay.name}</b></p>
+                <p class="">${stay.intro}</p>
                 <div class="search-content mt-4">
-                    남은 객실 수<br>
-                    인원 수<br>
-                    가격<br>
+                    인원 수: ${stay.people}<br>
+                    가격: ${stay.price}<br>
                 </div>
             </div>
         </div>
+        </c:forEach>
+        
 
     </div>
-</main>
+</div>
 
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Plugin JavaScript -->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
 <!-- Custom scripts for this template -->
-<script src="js/creative.min.js"></script>
-<script src="js/backstretch.js"></script>
+<script src="/js/creative.min.js"></script>
+<script src="/js/backstretch.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 
 <script>
 

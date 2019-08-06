@@ -1,6 +1,8 @@
 package changuk.project.stay.controller;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import changuk.project.stay.domain.Member;
+import changuk.project.stay.domain.Reservation;
 import changuk.project.stay.domain.Stay;
 import changuk.project.stay.service.StayService;
 
@@ -52,5 +55,21 @@ public class StayController {
 		return "redirect:/";
 		
 	}//end of post
+	
+	/** 숙소 검색하기 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException **/
+	@PostMapping("search")
+	public String search(@ModelAttribute Reservation reservation, 
+			@RequestParam("address") String address, Model model) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+		
+		model.addAttribute("list", stayService.findReserve(reservation, "%" + address + "%"));
+		model.addAttribute("reservation", reservation);
+		model.addAttribute("address", address);
+		
+		return "stay/search";
+		
+	}//end of search
 	
 }//end of StayController

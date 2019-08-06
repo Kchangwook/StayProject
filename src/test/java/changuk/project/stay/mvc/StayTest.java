@@ -3,11 +3,13 @@ package changuk.project.stay.mvc;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import changuk.project.stay.controller.StayController;
 import changuk.project.stay.domain.Member;
+import changuk.project.stay.domain.Reservation;
 import changuk.project.stay.domain.Stay;
 import changuk.project.stay.service.StayService;
 import changuk.project.stay.util.MapperUtil;
@@ -42,11 +45,14 @@ public class StayTest {
 	private Stay s2;
 	private Stay s3;
 	private Member m1;
+	List<Stay> list;
 	
 	/* 변수 */
 	/** 사전 설정 **/
 	@Before
 	public void setUp() {
+		
+		list = new ArrayList<>();
 		
 		s1 = Stay.builder().code(1).email("kchangwook@naver.com").address("서울 동작구 대방동 391-311").domain("www.naver.com")
 				.image("/img/basic/stay.jpg").intro("안녕").name("123").people(1).rooms(1).phone("010-2684-1451")
@@ -64,6 +70,10 @@ public class StayTest {
 	            "text/plain", "Some dataset...".getBytes());
 		
 		m1 = Member.builder().email("kchangwook@naver.com").password("1234").name("김창욱").phone("010-2684-1451").build();
+		
+		list.add(s1);
+		list.add(s2);
+		list.add(s3);
 		
 	}//end of setUp
 	
@@ -86,11 +96,6 @@ public class StayTest {
 	@Test
 	public void hosting() throws Exception {
 		
-		List<Stay> list = new ArrayList<>();
-		list.add(s1);
-		list.add(s2);
-		list.add(s3);
-		
 		when(stayService.getList(m1.getEmail())).thenReturn(list);
 		
 		mvc.perform(get("/stay/hosting").sessionAttr("member", m1))
@@ -99,5 +104,25 @@ public class StayTest {
 		.andExpect(model().attribute("list", list));
 		
 	}//end of hosting
+	
+	/** search URL 테스트 
+	 * @throws Exception **/
+	public void search() throws Exception {
+		
+		LocalDate today = LocalDate.now();
+		LocalDate t = LocalDate.now().plusDays(4L);
+		
+		Reservation r = Reservation.builder().checkIn(today).checkOut(t).people(0).build();
+		
+		when(stayService.findReserve(r, "%서울%")).thenReturn(list);
+		
+		mvc.perform(post("/stay/search").params(MapperUtil.changeStringMap(r)).param("address", "%서울%"))
+		.andExpect(status().isOk())
+		.andExpect(model().attribute("list", list))
+		.andExpect(model().attribute("reservatiion", r))
+		.andExpect(model().attribute("address", "%서울%"))
+		.andExpect(view().name("stay/search"));
+		
+	}//end of search
 	
 }//end of StayTest

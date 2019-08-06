@@ -3,6 +3,7 @@ package changuk.project.stay.repository;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import changuk.project.stay.domain.Reservation;
 import changuk.project.stay.domain.Stay;
 
 @RunWith(SpringRunner.class)
@@ -65,5 +67,6 @@ public class StayRepositoryTest {
 		assertThat(list.get(0).getDomain(), is(s1.getDomain()));
 		
 	}//end of findByEmail
+	
 	
 }//end of StayRepositoryTest

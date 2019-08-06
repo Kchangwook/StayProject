@@ -9,10 +9,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#login">로그인</a>
+                    <a class="nav-link js-scroll-trigger text-white" data-toggle="modal" data-target="#login">로그인</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#join">회원가입</a>
+                    <a class="nav-link js-scroll-trigger text-white" data-toggle="modal" data-target="#join">회원가입</a>
                 </li>
             </ul>
         </div>

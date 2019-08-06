@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page isErrorPage="true" %>
 <!DOCTYPE html>
 <html>
     <meta charset="utf-8">
@@ -42,33 +41,33 @@
 <main class="container">
     <div class="home-main mb-5">
         <h2 class="home-main-text">즐거운 여행을 위한 숙소를 찾아보세요.</h2>
+        <form action="/stay/search" method="post">
         <div class="mt-4">
             <label for="dest" class="home-main-label">목적지</label>
-            <input type="text" class="form-control" id="dest" required>
+            <input type="text" class="form-control" id="dest" name="address" required>
         </div>
         <div class="mt-2">
             <div class="home-date">
                 <label for="check-in" class="home-main-label">체크인</label>
                 <div class='input-group date'>
-                    <input type='text' class="form-control" id="check-in" required>
-                    </span>
+                    <input type='text' class="form-control" id="check-in" name="checkIn" required>
                 </div>
             </div>
             <div class="home-date">
                 <label for="check-out" class="home-main-label">체크아웃</label>
                 <div class='input-group date'>
-                    <input type='text' class="form-control" id="check-out" required>
-                    </span>
+                    <input type='text' class="form-control" id="check-out" name="checkOut" required>
                 </div>
             </div>
         </div>
         <div class="mt2">
             <label for="people" class="home-main-label">인원</label>
-            <input type="number" class="form-control" id="people" min="0" value="0" required>
+            <input type="number" class="form-control" id="people" min="0" name="people" required>
         </div>
         <div class="search-btn mt-3 mb-2">
-            <button class="btn btn-custom2">검색</button>
+            <button class="btn btn-custom2" type="submit">검색</button>
         </div>
+        </form>
     </div>
 </main>
 
