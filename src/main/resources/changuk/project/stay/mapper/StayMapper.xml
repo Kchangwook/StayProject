@@ -45,7 +45,7 @@
 	group by staycode) temp
 	where (stay.stayCode = temp.code and stay.stayrooms > temp.cnt)
 	group by stay.staycode) ex 
-	where ex.staypeople > #{people} and ex.stayrooms > ex.cnt and ex.stayaddress like #{address}
+	where ex.staypeople >= #{people} and ex.stayrooms > ex.cnt and ex.stayaddress like #{address}
 	]]>
 	</select>
 

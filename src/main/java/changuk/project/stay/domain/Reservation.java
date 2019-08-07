@@ -47,10 +47,13 @@ public class Reservation {
 	
 	@Column(name="reservationprice", nullable=false)
 	private Integer price;
+	
+	@Column(name="stayname", nullable=false)
+	private String stayName;
 
 	@Builder
 	public Reservation(Integer code, String email, Integer stayCode, LocalDate checkIn, LocalDate checkOut, Integer people,
-			Integer price) {
+			Integer price, String stayName) {
 		super();
 		this.code = code;
 		this.email = email;
@@ -59,6 +62,7 @@ public class Reservation {
 		this.checkOut = checkOut;
 		this.people = people;
 		this.price = price;
+		this.stayName = stayName;
 	}
 	
 }//end of Reservation

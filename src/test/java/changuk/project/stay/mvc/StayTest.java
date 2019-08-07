@@ -4,6 +4,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.cookie;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -120,8 +121,12 @@ public class StayTest {
 		.andExpect(status().isOk())
 		.andExpect(model().attribute("list", list))
 		.andExpect(model().attribute("reservatiion", r))
-		.andExpect(model().attribute("address", "%서울%"))
-		.andExpect(view().name("stay/search"));
+		.andExpect(model().attribute("address", "서울"))
+		.andExpect(view().name("stay/search"))
+		.andExpect(cookie().value("checkIn", String.valueOf(r.getCheckIn())))
+		.andExpect(cookie().value("checkOut", String.valueOf(r.getCheckOut())))
+		.andExpect(cookie().value("address", "서울"))
+		.andExpect(cookie().value("people", String.valueOf(r.getPeople())));
 		
 	}//end of search
 	

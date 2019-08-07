@@ -1,5 +1,7 @@
 package changuk.project.stay.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +11,6 @@ import changuk.project.stay.domain.Reservation;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, String>{
 
-	
+	List<Reservation> findByEmailOrderByCodeAsc(String email);
 	
 }//end of ReservationRepository

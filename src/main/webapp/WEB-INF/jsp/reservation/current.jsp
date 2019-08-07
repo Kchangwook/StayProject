@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +31,7 @@
 <!-- Theme CSS - Includes Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link href="css/creative.css" rel="stylesheet">
-<link rel="shortcut icon" type="image/x-icon" href="img/logo-icon.png">
+<link rel="shortcut icon" type="image/x-icon" href="/img/basic/logo-icon.png">
 <link href="css/custom.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -38,6 +39,9 @@
 
 </head>
 <body>
+
+<jsp:include page="../nav/other.jsp"/>
+
 	<div class="container">
 		<div class="row">
 			<div class="host-list mt-4 mx-auto">
@@ -54,27 +58,15 @@
 							</tr>
 						</thead>
 						<tbody>
+							<c:forEach items="${list}" var="book">
 							<tr>
-								<td>숙소 명</td>
-								<td>인원 수</td>
-								<td>가격</td>
-								<td>체크인</td>
-								<td>체크아웃</td>
+								<td>${book.stayName}</td>
+								<td>${book.people}</td>
+								<td>${book.price}</td>
+								<td>${book.checkIn}</td>
+								<td>${book.checkOut}</td>
 							</tr>
-							<tr>
-								<td>숙소 명</td>
-								<td>인원 수</td>
-								<td>가격</td>
-								<td>체크인</td>
-								<td>체크아웃</td>
-							</tr>
-							<tr>
-								<td>숙소 명</td>
-								<td>인원 수</td>
-								<td>가격</td>
-								<td>체크인</td>
-								<td>체크아웃</td>
-							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

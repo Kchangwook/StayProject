@@ -3,6 +3,9 @@ package changuk.project.stay.controller;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,11 +65,12 @@ public class StayController {
 	 * @throws IllegalArgumentException **/
 	@PostMapping("search")
 	public String search(@ModelAttribute Reservation reservation, 
-			@RequestParam("address") String address, Model model) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+			@RequestParam("address") String address, Model model,
+			HttpServletResponse response) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 		
 		model.addAttribute("list", stayService.findReserve(reservation, "%" + address + "%"));
-		model.addAttribute("reservation", reservation);
-		model.addAttribute("address", address);
+		
+		response = addCookie(response, reservation, address);
 		
 		return "stay/search";
 		
@@ -81,5 +85,26 @@ public class StayController {
 		return "stay/detail";
 		
 	}//end of getStay
+	
+	/** 쿠키에 검색 내용 추가하는 함수 **/
+	private HttpServletResponse addCookie(HttpServletResponse response, Reservation r, String a) {
+		
+		for(int i = 0; i < 4; i++) {
+			
+			Cookie temp = null;
+			
+			if(i == 0) temp = new Cookie("checkIn", String.valueOf(r.getCheckIn()));
+			if(i == 1) temp = new Cookie("checkOut", String.valueOf(r.getCheckOut()));
+			if(i == 2) temp = new Cookie("people",String.valueOf(r.getPeople()));
+			if(i == 3) temp = new Cookie("address", a);
+			
+			temp.setPath("/");
+			response.addCookie(temp);
+			
+		}
+		
+		return response;
+		
+	}//end of addCookie
 	
 }//end of StayController

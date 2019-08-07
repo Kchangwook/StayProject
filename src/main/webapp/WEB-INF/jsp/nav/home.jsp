@@ -21,7 +21,7 @@
                     <a class="nav-link js-scroll-trigger text-white" href="/stay/hosting">호스팅 현황</a>
                 </li>
                 <li class="nav-item my-auto">
-                    <a class="nav-link js-scroll-trigger text-white" data-toggle="modal" data-target="#join">예약 현황</a>
+                    <a class="nav-link js-scroll-trigger text-white" href="/reservation">예약 현황</a>
                 </li>
                 <li class="nav-item my-auto">
                     <a class="nav-link js-scroll-trigger text-white" href="/logout">로그아웃</a>

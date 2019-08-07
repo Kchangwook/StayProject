@@ -30,15 +30,15 @@
 
 <body>
 
-<c:if test="${empty member }">
+<c:if test="${empty sessionScope.member }">
 	<jsp:include page="./nav/no-home.jsp"/>
 </c:if>
-<c:if test="${not empty member }">
+<c:if test="${not empty sessionScope.member }">
 	<jsp:include page="./nav/home.jsp"/>
 </c:if>
 
 <!-- Masthead -->
-<main class="container">
+<div class="container">
     <div class="home-main mb-5">
         <h2 class="home-main-text">즐거운 여행을 위한 숙소를 찾아보세요.</h2>
         <form action="/stay/search" method="post">
@@ -69,7 +69,7 @@
         </div>
         </form>
     </div>
-</main>
+</div>
 
 <!-- Bootstrap core JavaScript -->
 <script src="/vendor/jquery/jquery.min.js"></script>
@@ -85,7 +85,13 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/custom/main.js"></script>
+<script src="/js/jquery.cookie.js"></script>
 <script>
+	if($.cookie('address') != null) $('#dest').val($.cookie('address'));
+	if($.cookie('people') != null) $('#people').val($.cookie('people'));
+	if($.cookie('checkIn') != null) $('#check-in').val($.cookie('checkIn'));
+	if($.cookie('checkOut') != null) $('#check-out').val($.cookie('checkOut'));
+		
 	if($('#msg').val() != '') alert($('#msg').val());
 </script>
 </body>

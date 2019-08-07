@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,7 @@ import changuk.project.stay.domain.Reservation;
 /** Reservation Repository 테스트 **/
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ReservationTest {
+public class ReservationRepositoryTest {
 	
 	/* 변수 */
 	private @Autowired ReservationRepository repository;
@@ -33,16 +34,17 @@ public class ReservationTest {
 	public void setUp() {
 		
 		r1 = Reservation.builder().code(1).email("ckddnr@naver.com").stayCode(1).people(1).price(1)
-				.checkIn(today).checkOut(t1).build();
+				.checkIn(today).checkOut(t1).stayName("123").build();
 		
 		r2 = Reservation.builder().code(2).email("ckddnr@naver.com").stayCode(2).people(4).price(4444)
-				.checkIn(today).checkOut(t2).build();
+				.checkIn(today).checkOut(t2).stayName("창욱집").build();
 		
 		r3 = Reservation.builder().code(3).email("ckddnr@naver.com").stayCode(2).people(4).price(4444)
-				.checkIn(today).checkOut(t3).build();
+				.checkIn(today).checkOut(t3).stayName("창욱집").build();
 		
 	}//end of setUP
 	
+	/** 기본 저장 테스트 **/
 	@Test
 	public void basic() {
 		
@@ -53,5 +55,19 @@ public class ReservationTest {
 		assertThat(repository.count(), is(3L));
 		
 	}//end of save
+	
+	/** 이메일에 해당하는 목록 가져오기 테스트 **/
+	@Test
+	public void findByEmail() {
+		
+		List<Reservation> list = repository.findByEmailOrderByCodeAsc(r1.getEmail());
+		
+		assertThat(list.size(), is(3));
+		
+		assertThat(list.get(0).getCode(), is(r1.getCode()));
+		assertThat(list.get(1).getCode(), is(r2.getCode()));
+		assertThat(list.get(2).getCode(), is(r3.getCode()));
+		
+	}//end of findByEmail
 
 }//end of ReservationTest

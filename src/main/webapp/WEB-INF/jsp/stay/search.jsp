@@ -31,11 +31,11 @@
 </head>
 <body>
 
-<c:if test="${empty member }">
-	<jsp:include page="../nav/no-other.jsp"/>
+<c:if test="${empty sessionScope.member }">
+	<jsp:include page="../nav/no-home.jsp"/>
 </c:if>
-<c:if test="${not empty member }">
-	<jsp:include page="../nav/other.jsp"/>
+<c:if test="${not empty sessionScope.member }">
+	<jsp:include page="../nav/home.jsp"/>
 </c:if>
 
 <div class="container">
@@ -101,38 +101,13 @@
 <script src="/js/backstretch.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
-
+<script src="/js/custom/search.js"></script>
+<script src="/js/jquery.cookie.js"></script>
 <script>
-
-	function move(num){
-		
-		location.href='/stay/' + num;
-		
-	}//end of move
-
-    $(document).ready(function () {
-
-        var tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-
-        $('#check-in').datepicker({
-            dateFormat: 'yy-mm-dd',
-            minDate: new Date(),
-            onClose: function () {
-                $('#check-out').datepicker({
-                    dateFormat: 'yy-mm-dd',
-                    minDate: new Date($('#check-in').val())
-                });
-            }
-        });
-
-        $('#check-out').datepicker({
-            dateFormat: 'yy-mm-dd',
-            minDate: tomorrow
-        });
-
-    });
-
+if($.cookie('address') != null) $('#dest').val($.cookie('address'));
+if($.cookie('people') != null) $('#people').val($.cookie('people'));
+if($.cookie('checkIn') != null) $('#check-in').val($.cookie('checkIn'));
+if($.cookie('checkOut') != null) $('#check-out').val($.cookie('checkOut'));
 </script>
 </body>
 </html>
