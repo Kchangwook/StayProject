@@ -52,7 +52,7 @@ public class ReservationRepositoryTest {
 		repository.save(r2);
 		repository.save(r3);
 		
-		assertThat(repository.count(), is(3L));
+		assertThat(repository.count(), is(5L));
 		
 	}//end of save
 	
@@ -62,12 +62,24 @@ public class ReservationRepositoryTest {
 		
 		List<Reservation> list = repository.findByEmailOrderByCodeAsc(r1.getEmail());
 		
-		assertThat(list.size(), is(3));
+		assertThat(list.size(), is(4));
 		
 		assertThat(list.get(0).getCode(), is(r1.getCode()));
 		assertThat(list.get(1).getCode(), is(r2.getCode()));
 		assertThat(list.get(2).getCode(), is(r3.getCode()));
 		
 	}//end of findByEmail
+	
+	/** 예약 삭제하기 **/
+//	@Test
+//	public void delete() {
+//		
+//		assertThat(repository.count(), is(5L));
+//		
+//		repository.deleteByCode(r1.getCode());
+//		
+//		assertThat(repository.count(), is(4L));
+//		
+//	}//end of delete
 
 }//end of ReservationTest

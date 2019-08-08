@@ -12,5 +12,6 @@ public interface ReservationService {
 
 	Reservation add(Reservation reservation);	// 예약 추가
 	List<Reservation> getMine(String email);	// 이메일에 해당하는 예약 가져오기
+	boolean delete(Integer code);				// 예약 취소
 	
 }//end of ReservationService

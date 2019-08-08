@@ -29,4 +29,10 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationRepository.findByEmailOrderByCodeAsc(email);
 	}//end of getMine
 
+	/** 예약 취소하기 **/
+	@Override
+	public boolean delete(Integer code) {
+		return reservationRepository.deleteByCode(code) > 0;
+	}//end of delete
+
 }//end of ReservationServiceImpl

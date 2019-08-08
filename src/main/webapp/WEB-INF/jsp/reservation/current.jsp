@@ -47,6 +47,10 @@
 			<div class="host-list mt-4 mx-auto">
 				<h1 class="search-main-text">예약 현황</h1>
 				<div class="custom-content row">
+					<c:if test="${empty list}">
+				      <h4 class="search-main-text mt-5">현재 진행중인 예약이 없습니다.</h4>
+					</c:if>
+					<c:if test="${not empty list}">
 					<table class="table table-hover reservation-table mt-4">
 						<thead>
 							<tr>
@@ -59,16 +63,21 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${list}" var="book">
-							<tr>
+							<tr id="${book.code}">
 								<td>${book.stayName}</td>
 								<td>${book.people}</td>
 								<td>${book.price}</td>
 								<td>${book.checkIn}</td>
-								<td>${book.checkOut}</td>
+								<td>${book.checkOut}
+								<button type="button" class="close" aria-label="Close" onClick="deletes('${book.code}')">
+  									<span aria-hidden="true">&times;</span>
+								</button>
+								</td>
 							</tr>
 							</c:forEach>
 						</tbody>
 					</table>
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -88,5 +97,23 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.tmpl.min.js"></script>
+	<script>
+	function deletes(code){
+		if(confirm('예약을 취소하시겠습니까?')){
+			
+			$.ajax({
+				url: '/reservation/'+code ,
+				method:'delete',
+				success: function(data){
+					if(data == true){
+						alert('예약이 취소되셨습니다.');
+						$('#'+code).remove();
+					}
+				}
+			});
+			
+		}
+	}
+	</script>
 </body>
 </html>
