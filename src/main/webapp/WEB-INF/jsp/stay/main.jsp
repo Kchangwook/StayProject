@@ -106,7 +106,7 @@
                 </div>
                 </c:forEach>
 </script>
-<script id="hosting-reservation" type="text/template">
+<script id="hosting-reservation" type="text/x-jquery-tmpl">
     <h3 class="search-main-text mt-5">예약 현황</h3>
     <table class="table table-hover reservation-table mt-4">
         <thead>
@@ -120,30 +120,16 @@
         </tr>
         </thead>
         <tbody>
+		{{each(i, item) data}}
         <tr>
-            <td>예약자</td>
-            <td>숙소 명</td>
-            <td>인원 수</td>
-            <td>가격</td>
-            <td>체크인</td>
-            <td>체크아웃</td>
+            <td>\${item.email}</td>
+            <td>\${item.stayName}</td>
+            <td>\${item.people}</td>
+            <td>\${item.price}</td>
+            <td>\${item.checkIn}</td>
+            <td>\${item.checkOut}</td>
         </tr>
-        <tr>
-            <td>예약자</td>
-            <td>숙소 명</td>
-            <td>인원 수</td>
-            <td>가격</td>
-            <td>체크인</td>
-            <td>체크아웃</td>
-        </tr>
-        <tr>
-            <td>예약자</td>
-            <td>숙소 명</td>
-            <td>인원 수</td>
-            <td>가격</td>
-            <td>체크인</td>
-            <td>체크아웃</td>
-        </tr>
+		{{/each}}
         </tbody>
     </table>
 </script>
@@ -162,12 +148,19 @@
 
     $('#reservation').on('click', function () {
         if ($(this).hasClass('btn-default')) {
-            $(this).removeClass('btn-default');
-            $(this).addClass('btn-custom2');
-            $('#stay').removeClass('btn-custom2');
-            $('#stay').addClass('btn-default');
-            $('#hosting-content').empty();
-            $('#hosting-reservation').tmpl().appendTo('#hosting-content');
+        	$.ajax({
+        		url: '/reservation/hosting',
+        		type: 'get',
+        		success: function(data){
+                    $('#reservation').removeClass('btn-default');
+                    $('#reservation').addClass('btn-custom2');
+                    $('#stay').removeClass('btn-custom2');
+                    $('#stay').addClass('btn-default');
+                    $('#hosting-content').empty();
+                    $('#hosting-reservation').tmpl(data).appendTo('#hosting-content');
+        		}
+        	});
+        	
         }
     });
     

@@ -33,12 +33,11 @@ public class ReservationController {
 		
 	}//end of post
 	
-	/** 내가 예약 진행 중인 목록 가져오기 **/
+	/** 내가 예약한 목록 가져오기 **/
 	@GetMapping("")
 	public String get(@SessionAttribute("member") Member member, Model model) {
 		
 		model.addAttribute("list", reservationService.getMine(member.getEmail()));
-		
 		return "reservation/current";
 		
 	}//end of get

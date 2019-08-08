@@ -11,7 +11,8 @@ import changuk.project.stay.domain.Reservation;
 public interface ReservationService {
 
 	Reservation add(Reservation reservation);	// 예약 추가
-	List<Reservation> getMine(String email);	// 이메일에 해당하는 예약 가져오기
+	List<Reservation> getMine(String email);	// 내가 한 예약 가져오기
 	boolean delete(Integer code);				// 예약 취소
+	List<Reservation> getHosting(String email);	// 내 숙소와 관련된 예약 가져오기
 	
 }//end of ReservationService

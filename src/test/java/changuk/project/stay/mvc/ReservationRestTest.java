@@ -2,6 +2,7 @@ package changuk.project.stay.mvc;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -80,5 +81,18 @@ public class ReservationRestTest {
 		.andExpect(content().string("false"));
 		
 	}//end of delete
+	
+	/** HostingURL 테스트 
+	 * @throws Exception **/
+	@Test
+	public void hostingTest() throws Exception {
+		
+		when(service.getHosting(m2.getEmail())).thenReturn(list);
+		
+		mvc.perform(get("/reservation/hosting").sessionAttr("member", m2))
+		.andExpect(status().isOk())
+		.andExpect(content().string(list.toString()));
+		
+	}//end of hosting
 	
 }//end of ReservationRestTest

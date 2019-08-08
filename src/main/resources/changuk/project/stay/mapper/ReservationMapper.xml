@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  -->
+<mapper namespace="changuk.project.stay.mapper.ReservationMapper">
+
+	<resultMap type="reservation" id="book">
+		<result column="reservationcode" property="code"/>
+		<result column="memberemail" property="email"/>
+		<result column="stayname" property="stayName"/>
+		<result column="reservationpeople" property="people"/>
+		<result column="reservationprice" property="price"/>
+		<result column="reservationcheckin" property="checkIn"/>
+		<result column="reservationcheckOut" property="checkOut"/>
+		<result column="staycode" property="stayCode"/>
+	</resultMap>
+	
+	<select id="getHosting" parameterType="string" resultMap="book">
+		select r.reservationcode, r.memberemail, r.staycode, r.stayname, r.reservationcheckin, r.reservationcheckout, r.reservationpeople, r.reservationprice
+		from reservation r, stay s 
+ 		where r.stayCode = s.stayCode and s.memberemail = #{email}
+	</select>
+
+</mapper>
