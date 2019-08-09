@@ -48,7 +48,7 @@
             <div class="custom-content row">
                 <div class="col-12">
                     <span id="address">${stay.address}</span>
-                    <c:if test="${sessionScope.member.email not eq stay.email}">
+                    <c:if test="${sessionScope.member.email ne stay.email}">
                     	<button class="btn btn-success font-custom float-right" id="booking">예약하기</button>
                     </c:if>
                     <c:if test="${sessionScope.member.email eq stay.email}">
@@ -136,6 +136,8 @@
 <script>
 
 $('#hosting-cancel').on('click', function(){
+	
+	if(confirm('호스팅을 취소하시겠습니까?')){
 	$.ajax({
 		url: '/stay/${stay.code}',
 		type: 'delete',
@@ -146,10 +148,11 @@ $('#hosting-cancel').on('click', function(){
 			}else alert('호스팅 숙소 취소에 실패했습니다.');
 		}
 	});
+}
 });
 
 $('#booking').on('click', function(){
-
+	console.log('${sessionScope.member}');
 	if('${sessionScope.member}' == '') alert('로그인 후 이용 가능합니다.');
 	else $('#book').modal();
 	
@@ -241,6 +244,5 @@ $(document).ready(function(){
 	
 });
 </script>
-
 </body>
 </html>

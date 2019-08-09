@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Builder;
@@ -17,7 +16,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /** Reservation 데이터를 담는 클래스 **/
-@Alias("reservation")
 @Data
 @NoArgsConstructor
 @Entity

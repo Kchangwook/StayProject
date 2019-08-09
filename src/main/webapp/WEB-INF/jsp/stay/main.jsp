@@ -91,8 +91,12 @@
 <script src="/js/jquery.tmpl.min.js"></script>
 <script id="hosting-stay" type="text/template">
     <h3 class="search-main-text mt-5">내가 호스팅 하는 숙소</h3>
-    <c:forEach items="${list}" var="stay">
-                <div class="stay-item mt-4 row">
+                <c:if test="${empty list}">
+                <h4 class="search-main-text mt-5">호스팅 중인 숙소가 없습니다.</h4>
+                </c:if>
+                <c:if test="${not empty list}">
+                <c:forEach items="${list}" var="stay">
+                <div class="stay-item mt-4 row" onClick="goDetail(${stay.code})">
                     <img src="${stay.image}" class="search-img col-4">
                     <div class="col-8">
                         <p class="mt-2"><b>${stay.name}</b></p>
@@ -105,6 +109,7 @@
                     </div>
                 </div>
                 </c:forEach>
+                </c:if>
 </script>
 <script id="hosting-reservation" type="text/x-jquery-tmpl">
     <h3 class="search-main-text mt-5">예약 현황</h3>

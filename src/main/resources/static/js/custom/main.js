@@ -26,7 +26,7 @@
         });
         
         $('#join-btn').on('click', function(){
-        	if($('#warning').css('display','block')) {
+        	if($('#warning').css('display','block') == true) {
         		alert('이메일이 중복되었습니다.');
         		return false;
         	}

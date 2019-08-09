@@ -7,14 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.apache.ibatis.type.Alias;
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Alias("stay")
 @NoArgsConstructor
 @Entity
 @Table(name = "stay")

@@ -54,7 +54,7 @@
                 <div class="mt-4">
                     <img src="/img/basic/logo-icon.png" class="d-block mx-auto">
                 </div>
-                <form action="member" method="post" id="join-frm">
+                <form action="/member" method="post" id="join-frm">
                     <div>
                         <div class="mt-4">
                             <label for="join-email" class="home-main-label">이메일</label>

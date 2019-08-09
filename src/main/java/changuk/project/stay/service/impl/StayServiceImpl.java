@@ -51,4 +51,10 @@ public class StayServiceImpl implements StayService {
 		return stayRepository.findByCode(code);
 	}//end of getStay
 
+	/** 숙소 코드로 호스팅 취소하기 **/
+	@Override
+	public boolean delete(Integer code) {
+		return stayRepository.deleteByCode(code) > 0;
+	}//end of delete
+
 }//end of StayServiceImpl
