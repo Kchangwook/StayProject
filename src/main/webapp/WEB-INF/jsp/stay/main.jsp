@@ -57,7 +57,7 @@
                 </c:if>
                 <c:if test="${not empty list}">
                 <c:forEach items="${list}" var="stay">
-                <div class="stay-item mt-4 row">
+                <div class="stay-item mt-4 row" onClick="goDetail(${stay.code})">
                     <img src="${stay.image}" class="search-img col-4">
                     <div class="col-8">
                         <p class="mt-2"><b>${stay.name}</b></p>
@@ -134,6 +134,10 @@
     </table>
 </script>
 <script>
+
+	function goDetail(code){
+		location.href='/stay/' + code;
+	}
 
     $('#stay').on('click', function () {
         if ($(this).hasClass('btn-default')) {

@@ -1,7 +1,6 @@
 package changuk.project.stay.controller;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -60,10 +59,7 @@ public class StayController {
 		
 	}//end of post
 	
-	/** 숙소 검색하기 
-	 * @throws InvocationTargetException 
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException **/
+	/** 숙소 검색하기 **/
 	@PostMapping("search")
 	public String search(@ModelAttribute Reservation reservation, 
 			@RequestParam("address") String address, Model model,

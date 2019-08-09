@@ -35,10 +35,10 @@
 <body>
 
 <c:if test="${empty sessionScope.member }">
-	<jsp:include page="../nav/no-home.jsp"/>
+	<jsp:include page="../nav/no-other.jsp"/>
 </c:if>
 <c:if test="${not empty sessionScope.member }">
-	<jsp:include page="../nav/home.jsp"/>
+	<jsp:include page="../nav/other.jsp"/>
 </c:if>
 
 <div class="container">
@@ -48,7 +48,12 @@
             <div class="custom-content row">
                 <div class="col-12">
                     <span id="address">${stay.address}</span>
-                    <button class="btn btn-success font-custom float-right" data-toggle="modal" data-target="#book">예약하기</button>
+                    <c:if test="${sessionScope.member.email not eq stay.email}">
+                    	<button class="btn btn-success font-custom float-right" id="booking">예약하기</button>
+                    </c:if>
+                    <c:if test="${sessionScope.member.email eq stay.email}">
+                    	<button class="btn btn-success font-custom float-right" id="hosting-cancel">호스팅 취소하기</button>
+                    </c:if>
                 </div>
                 <div class="stay-img mx-auto mt-3">
                     <img src="${stay.image}" class="stay-img">
@@ -63,16 +68,6 @@
                     <p>객실 소개: ${stay.intro}</p>
                 </div>
                 <div id="map" style="width:500px;height:400px;"></div>
-                <!-- <div class="reply-list col-lg-12 mt-4">
-                    <h3 class="search-main-text">후기</h3>
-                    <div class="stay-item mt-4 row">
-                        <img src="img/profile.png" class="reply-img">
-                        <div class="col-8 my-auto">
-                            <p class="float-left"><b>이름</b></p>
-                            <p class="float-left ml-4">소개</p>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -139,6 +134,26 @@
 <script src="/js/jquery.cookie.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script>
+
+$('#hosting-cancel').on('click', function(){
+	$.ajax({
+		url: '/stay/${stay.code}',
+		type: 'delete',
+		success: function(data){
+			if(data == true){
+				alert('호스팅 숙소가 삭제되었습니다.');
+				location.href='/';
+			}else alert('호스팅 숙소 취소에 실패했습니다.');
+		}
+	});
+});
+
+$('#booking').on('click', function(){
+
+	if('${sessionScope.member}' == '') alert('로그인 후 이용 가능합니다.');
+	else $('#book').modal();
+	
+});
 
 var IMP = window.IMP; // 생략가능
 IMP.init('imp65623511'); 
