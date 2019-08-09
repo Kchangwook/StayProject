@@ -48,7 +48,7 @@ public class HomeController {
 	public String logout(HttpSession session) {
 		
 		session.invalidate();
-		return "home";
+		return "redirect:/";
 		
 	}//end of logout
 	

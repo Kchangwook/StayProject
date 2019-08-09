@@ -3,6 +3,7 @@ package changuk.project.stay.repository;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.Before;
@@ -79,5 +80,20 @@ public class StayRepositoryTest {
 		
 	}//end of findByCode
 	
+	/** 예약 가능한 숙소 찾는 프로시저 호출 **/
+	@Test
+	public void findReserve() {
+		
+		LocalDate today = LocalDate.now();
+		LocalDate t1 = LocalDate.now().plusDays(4L);
+		String address = "%서울%";
+		
+		List<Stay> list = repository.findReserve(today, t1, address, 2, "kchangwook@naver.com");
+		
+		assertThat(list.size(), is(0));
+		
+		System.out.println(list);
+		
+	}//end of findReserve
 	
 }//end of StayRepositoryTest

@@ -1,7 +1,6 @@
 package changuk.project.stay.service;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -20,6 +19,6 @@ public interface StayService {
 	Stay getStay(Integer code);			// 코드로 숙소 가져오기
 	
 	// 예약 가능한 숙소 목록 가져오기
-	List<Stay> findReserve(Reservation r, String address) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException;
+	List<Stay> findReserve(Reservation r, String address, String email);
 	
 }//end of StayService

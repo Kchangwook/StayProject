@@ -115,13 +115,21 @@ public class StayTest {
 		
 		Reservation r = Reservation.builder().checkIn(today).checkOut(t).people(0).build();
 		
-		when(stayService.findReserve(r, "%서울%")).thenReturn(list);
+		when(stayService.findReserve(r, "%서울%", m1.getEmail())).thenReturn(list);
+		when(stayService.findReserve(r, "%서울%", null)).thenReturn(list);
+		
+		mvc.perform(post("/stay/search").sessionAttr("member", m1).params(MapperUtil.changeStringMap(r)).param("address", "%서울%"))
+		.andExpect(status().isOk())
+		.andExpect(model().attribute("list", list))
+		.andExpect(view().name("stay/search"))
+		.andExpect(cookie().value("checkIn", String.valueOf(r.getCheckIn())))
+		.andExpect(cookie().value("checkOut", String.valueOf(r.getCheckOut())))
+		.andExpect(cookie().value("address", "서울"))
+		.andExpect(cookie().value("people", String.valueOf(r.getPeople())));
 		
 		mvc.perform(post("/stay/search").params(MapperUtil.changeStringMap(r)).param("address", "%서울%"))
 		.andExpect(status().isOk())
 		.andExpect(model().attribute("list", list))
-		.andExpect(model().attribute("reservatiion", r))
-		.andExpect(model().attribute("address", "서울"))
 		.andExpect(view().name("stay/search"))
 		.andExpect(cookie().value("checkIn", String.valueOf(r.getCheckIn())))
 		.andExpect(cookie().value("checkOut", String.valueOf(r.getCheckOut())))

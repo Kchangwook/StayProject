@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,10 +67,14 @@ public class StayController {
 	@PostMapping("search")
 	public String search(@ModelAttribute Reservation reservation, 
 			@RequestParam("address") String address, Model model,
-			HttpServletResponse response) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+			HttpServletResponse response, HttpServletRequest request) {
 		
-		model.addAttribute("list", stayService.findReserve(reservation, "%" + address + "%"));
+		String email = "";
 		
+		if(request.getSession().getAttribute("member") != null)
+			email = ((Member)request.getSession().getAttribute("member")).getEmail();
+		
+		model.addAttribute("list", stayService.findReserve(reservation, address, email));
 		response = addCookie(response, reservation, address);
 		
 		return "stay/search";

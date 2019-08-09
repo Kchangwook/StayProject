@@ -81,5 +81,17 @@ public class ReservationRepositoryTest {
 //		assertThat(repository.count(), is(4L));
 //		
 //	}//end of delete
+	
+	/** 호스팅 중인 예약 목록 가져오기 **/
+	@Test
+	public void getHosting() {
+		
+		List<Reservation> list = repository.getHosting("kchangwook@naver.com");
+		
+		assertThat(list.size(), is(4));
+		
+		System.out.println(list);
+		
+	}//end of getHosting
 
 }//end of ReservationTest

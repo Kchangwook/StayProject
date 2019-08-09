@@ -32,10 +32,10 @@
 <body>
 
 <c:if test="${empty sessionScope.member }">
-	<jsp:include page="../nav/no-home.jsp"/>
+	<jsp:include page="../nav/no-other.jsp"/>
 </c:if>
 <c:if test="${not empty sessionScope.member }">
-	<jsp:include page="../nav/home.jsp"/>
+	<jsp:include page="../nav/other.jsp"/>
 </c:if>
 
 <div class="container">
