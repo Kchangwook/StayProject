@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -25,6 +26,7 @@ public class StayRepositoryTest {
 	private Stay s1;
 	private Stay s2;
 	private Stay s3;
+	private List<Stay> list;
 	
 	@Before
 	public void setUp() {
@@ -40,6 +42,13 @@ public class StayRepositoryTest {
 		s3 = Stay.builder().code(3).email("kchangwook@naver.com").address("서울 동작구 대방동 391-313").domain("www.naver.com")
 				.image("/img/basic/stay.jpg").intro("안녕").name("345").people(3).rooms(3).phone("010-2684-1451")
 				.price(300).build();
+		
+		list = new ArrayList<>();
+		
+		list.add(s1);
+		list.add(s2);
+		list.add(s3);
+		
 		
 	}//end of setUp
 	
@@ -58,12 +67,9 @@ public class StayRepositoryTest {
 	
 	/** 이메일과 일치하는 리스트 가져오기 **/
 	@Test
-	public void findByEmail() {
+	public void findByEmail() {	
 		
-		List<Stay> list = repository.findByEmailOrderByCode("kchangwook@naver.com");
-		
-		assertThat(list.size(), is(2));
-		assertThat(list.get(0).getDomain(), is(s1.getDomain()));
+		List<Stay> page = repository.findByEmailOrderByCode("kchangwook@naver.com");
 		
 	}//end of findByEmail
 	

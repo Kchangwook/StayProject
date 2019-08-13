@@ -1,0 +1,29 @@
+create procedure findReserve(
+IN checkin date,
+IN checkout date,
+IN people int,
+IN address varchar(200),
+IN email varchar(200)
+)
+BEGIN
+
+select staycode, memberemail, stayname, staypeople, stayaddress, stayphone, staydomain, stayrooms, stayintro, stayimage, stayprice from (select * , 0 as cnt from stay 
+where staycode not in(select stayCode from reservation 
+where (reservationcheckout > checkin and reservationcheckout < checkout )
+or (reservationcheckin >= checkin and reservationcheckin < checkout )
+or (reservationcheckin >= checkin and reservationcheckout <= checkout )
+or (reservationcheckin < checkin and reservationcheckout >checkout )
+group by staycode)
+union
+select stay.staycode, memberemail, stayname, staypeople, stayaddress, stayphone, staydomain, stayrooms, stayintro, stayimage, stayprice, cnt from stay, 
+(select staycode as code, count(*) as cnt from reservation 
+where (reservationcheckout > checkin and reservationcheckout < checkout )
+or (reservationcheckin >= checkin and reservationcheckin < checkout )
+or (reservationcheckin >= checkin and reservationcheckout <= checkout )
+or (reservationcheckin < checkin and reservationcheckout > checkout )
+group by staycode) temp
+where (stay.stayCode = temp.code and stay.stayrooms > temp.cnt)
+group by stay.staycode) ex where ex.staypeople >= people  and ex.stayrooms > ex.cnt and ex.stayaddress like concat('%', concat(address,'%'))
+and not ex.memberemail = email;
+
+END

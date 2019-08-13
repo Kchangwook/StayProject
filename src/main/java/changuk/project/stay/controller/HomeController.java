@@ -26,23 +26,6 @@ public class HomeController {
 		return "home";
 	}//end of get
 	
-	/** 로그인 **/
-	@PostMapping("")
-	public String post(@ModelAttribute Member member, HttpServletRequest request) {
-		
-		Member temp = memberService.findByEmail(member.getEmail());
-		
-		if(temp != null) {
-			
-			if(temp.getPassword().equals(member.getPassword())) request.getSession().setAttribute("member", temp);
-			else request.setAttribute("msg", "로그인에 실패했습니다.");
-			
-		}else request.setAttribute("msg", "로그인에 실패했습니다.");
-		
-		return "home";
-		
-	}//end of post
-	
 	/** 로그아웃 **/
 	@GetMapping("logout")
 	public String logout(HttpSession session) {

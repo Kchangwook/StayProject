@@ -174,7 +174,7 @@
     });
     
     $('#stay-regist').on('click',function(){
-    	location.href='/stay'
+    	location.href='/stay/add'
     });
 
 </script>

@@ -9,12 +9,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
+@Data
 @Entity
 @Table(name = "member")
 /** 회원 데이터를 저장하는 클래스 **/
-public class Member {
+public class Member{
 
 	@Id
 	@Column(name = "memberemail", nullable = false)

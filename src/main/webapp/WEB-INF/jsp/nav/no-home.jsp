@@ -28,7 +28,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body modal-mx">
-            <form action="/" method="post">
+            <form action="/login" method="post">
                 <div class="mt-4">
                     <img src="/img/basic/logo-icon.png" class="d-block mx-auto">
                 </div>
@@ -75,7 +75,7 @@
                                    placeholder="010-xxxx-xxxx" name="phone" required>
                         </div>
                     </div>
-                    <button class="btn btn-custom2 mt-4 btn-modal mb-4" id="join-btn" type="submit">회원가입</button>
+                    <button class="btn btn-custom2 mt-4 btn-modal mb-4" id="join-btn" type="button">회원가입</button>
                 </form>
             </div>
         </div>

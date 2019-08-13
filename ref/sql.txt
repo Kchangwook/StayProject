@@ -1,0 +1,77 @@
+﻿-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
+
+-- member Table Create SQL
+CREATE TABLE member
+(
+    `member_email`     VARCHAR(200)    NOT NULL, 
+    `member_password`  VARCHAR(200)    NOT NULL, 
+    `member_name`      VARCHAR(200)    NOT NULL, 
+    `member_image`     VARCHAR(200)    NULL, 
+    `member_phone`     VARCHAR(200)    NOT NULL, 
+    PRIMARY KEY (member_email)
+);
+
+
+-- stay Table Create SQL
+CREATE TABLE stay
+(
+    `stay_code`     INT              NOT NULL    AUTO_INCREMENT, 
+    `member_email`  VARCHAR(200)     NOT NULL, 
+    `stay_name`     VARCHAR(200)     NOT NULL, 
+    `stay_people`   INT              NOT NULL, 
+    `stay_address`  VARCHAR(1024)    NOT NULL, 
+    `stay_phone`    VARCHAR(200)     NOT NULL, 
+    `stay_domain`   VARCHAR(1024)    NOT NULL, 
+    `stay_rooms`    INT              NOT NULL, 
+    `stay_intro`    VARCHAR(1024)    NOT NULL, 
+    `stay_image`    VARCHAR(1024)    NULL, 
+    `stay_price`    INT              NOT NULL, 
+    PRIMARY KEY (stay_code)
+);
+
+ALTER TABLE stay
+    ADD CONSTRAINT FK_stay_member_email_member_member_email FOREIGN KEY (member_email)
+        REFERENCES  member(member_email) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- reservation Table Create SQL
+CREATE TABLE reservation
+(
+    `reservation_code`       INT             NOT NULL    AUTO_INCREMENT, 
+    `member_email`           VARCHAR(200)    NOT NULL, 
+    `stay_code`              INT             NOT NULL, 
+    `reservation_check_in`   DATE            NOT NULL, 
+    `reservation_check_out`  DATE            NOT NULL, 
+    `reservation_people`     INT             NOT NULL, 
+    `reservation_price`      INT             NOT NULL, 
+    PRIMARY KEY (reservation_code)
+);
+
+ALTER TABLE reservation
+    ADD CONSTRAINT FK_reservation_member_email_member_member_email FOREIGN KEY (member_email)
+        REFERENCES  member(member_email) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE reservation
+    ADD CONSTRAINT FK_reservation_stay_code_stay_stay_code FOREIGN KEY (stay_code)
+        REFERENCES  stay(stay_code) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+-- reply Table Create SQL
+CREATE TABLE reply
+(
+    `reply_code`     INT              NOT NULL    AUTO_INCREMENT, 
+    `stay_code`      INT              NOT NULL, 
+    `member_email`   VARCHAR(200)     NOT NULL, 
+    `reply_content`  VARCHAR(1024)    NOT NULL, 
+    PRIMARY KEY (reply_code)
+);
+
+ALTER TABLE reply
+    ADD CONSTRAINT FK_reply_stay_code_stay_stay_code FOREIGN KEY (stay_code)
+        REFERENCES  stay(stay_code) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE reply
+    ADD CONSTRAINT FK_reply_member_email_member_member_email FOREIGN KEY (member_email)
+        REFERENCES  member(member_email) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+

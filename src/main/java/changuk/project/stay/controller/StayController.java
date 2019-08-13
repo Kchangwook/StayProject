@@ -33,7 +33,7 @@ public class StayController {
 	
 	/* 함수 */
 	/** 숙소 등록 페이지로 이동 **/
-	@GetMapping("")
+	@GetMapping("add")
 	public String get() {
 		return "stay/regist";
 	}//end of get

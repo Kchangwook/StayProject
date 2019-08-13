@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +27,14 @@ public class MemberController {
 
 	/* 변수 */
 	private @Autowired MemberService memberService;
+	private @Autowired PasswordEncoder encoder;
 
 	/* 함수 */
 	/** 회원 가입을 하는 함수 **/
 	@PostMapping("")
 	public String post(@ModelAttribute Member member, Model model) {
 
+		member.setPassword(encoder.encode(member.getPassword()));
 		Member temp = memberService.add(member);
 
 		if (temp != null)

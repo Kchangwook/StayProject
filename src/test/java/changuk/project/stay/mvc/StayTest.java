@@ -20,6 +20,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -46,7 +48,8 @@ public class StayTest {
 	private Stay s2;
 	private Stay s3;
 	private Member m1;
-	List<Stay> list;
+	private List<Stay> list;
+	private Page<Stay> page;
 	
 	/* 변수 */
 	/** 사전 설정 **/
@@ -76,6 +79,8 @@ public class StayTest {
 		list.add(s2);
 		list.add(s3);
 		
+		page = new PageImpl<>(list);
+		
 	}//end of setUp
 	
 	/** add URL 테스트 
@@ -97,12 +102,11 @@ public class StayTest {
 	@Test
 	public void hosting() throws Exception {
 		
-		when(stayService.getList(m1.getEmail())).thenReturn(list);
-		
-		mvc.perform(get("/stay/hosting").sessionAttr("member", m1))
+		mvc.perform(get("/stay/hosting").sessionAttr("member", m1).param("size", "1")
+				.param("page", "0"))
 		.andExpect(status().isOk())
 		.andExpect(view().name("stay/main"))
-		.andExpect(model().attribute("list", list));
+		.andExpect(model().attribute("list", page));
 		
 	}//end of hosting
 	
